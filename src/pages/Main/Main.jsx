@@ -84,65 +84,50 @@ const Calculator = () => {
         <span>원</span>
       </div>{' '}
       <div className='calButtons'>
-        <button className='sm Btn' onClick={deleteAll}>
-          AC
-        </button>
-        <button className='sm Btn' onClick={deleteOne}>
-          C
-        </button>
-        <button className='sm Btn' value='+' onClick={getOperator}>
-          +
-        </button>
-        <button className='sm Btn' value='-' onClick={getOperator}>
-          -
-        </button>
-        <button className='sm Btn' value={7} onClick={getNumber}>
-          7
-        </button>
-        <button className='sm Btn' value={8} onClick={getNumber}>
-          8
-        </button>
-        <button className='sm Btn' value={9} onClick={getNumber}>
-          9
-        </button>
-        <button className='sm Btn' value='*' onClick={getOperator}>
-          *
-        </button>
-        <button className='sm Btn' value={4} onClick={getNumber}>
-          4
-        </button>
-        <button className='sm Btn' value={5} onClick={getNumber}>
-          5
-        </button>
-        <button className='sm Btn' value={6} onClick={getNumber}>
-          6
-        </button>
-        <button className='sm Btn' value='÷' onClick={getOperator}>
-          ÷
-        </button>
-        <button className='sm Btn' value={1} onClick={getNumber}>
-          1
-        </button>
-        <button className='sm Btn' value={2} onClick={getNumber}>
-          2
-        </button>
-        <button className='sm Btn' value={3} onClick={getNumber}>
-          3
-        </button>
-        <button className='sm Btn' onClick={getResult}>
-          =
-        </button>
-
-        <button className='xLong Btn' value={0} onClick={getNumber}>
-          0
-        </button>
-        <button className='sm Btn' value='00' onClick={getNumber}>
-          00
-        </button>
-        <div className='sm Btn'></div>
+        {buttonTypes.map((button) => {
+          return (
+            <Button
+              key={button.id}
+              name={button.name}
+              className={button.class}
+              functionName={
+                button.type === 'numb'
+                  ? getNumber
+                  : button.type === 'oper'
+                  ? getOperator
+                  : button.type === 'ac'
+                  ? deleteAll
+                  : button.type === 'c'
+                  ? deleteOne
+                  : getResult
+              }
+            />
+          );
+        })}
       </div>
     </div>
   );
 };
 
 export default Calculator;
+
+const buttonTypes = [
+  { id: 0, name: 'AC', class: 'sm Btn', type: 'ac' },
+  { id: 1, name: 'C', class: 'sm Btn', type: 'c' },
+  { id: 2, name: '+', class: 'sm Btn', type: 'oper' },
+  { id: 3, name: '-', class: 'sm Btn', type: 'oper' },
+  { id: 4, name: 7, class: 'sm Btn', type: 'numb' },
+  { id: 5, name: 8, class: 'sm Btn', type: 'numb' },
+  { id: 6, name: 9, class: 'sm Btn', type: 'numb' },
+  { id: 7, name: '*', class: 'sm Btn', type: 'oper' },
+  { id: 8, name: 4, class: 'sm Btn', type: 'numb' },
+  { id: 9, name: 5, class: 'sm Btn', type: 'numb' },
+  { id: 10, name: 6, class: 'sm Btn', type: 'numb' },
+  { id: 11, name: '÷', class: 'sm Btn', type: 'oper' },
+  { id: 12, name: 1, class: 'sm Btn', type: 'numb' },
+  { id: 13, name: 2, class: 'sm Btn', type: 'numb' },
+  { id: 14, name: 3, class: 'sm Btn', type: 'numb' },
+  { id: 15, name: '=', class: 'sm Btn' },
+  { id: 16, name: 0, class: 'xLong Btn', type: 'numb' },
+  { id: 17, name: '00', class: 'sm Btn', type: 'numb' },
+];
