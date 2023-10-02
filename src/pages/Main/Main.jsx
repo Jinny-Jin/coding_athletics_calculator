@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import './Main.scss';
 
 const Calculator = () => {
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState(0);
 
   const getNumber = (e) => {
+    if (result === 0) {
+      setResult('');
+    }
     setResult((prev) => prev + e.target.value);
   };
 
@@ -13,17 +16,23 @@ const Calculator = () => {
   };
 
   const getResult = () => {
-    let replaceString = result.replace(/×/gi, '*').replace(/÷/gi, '/');
+    const resultLength = String(eval(result)).length;
 
-    if (isNaN(eval(replaceString))) {
+    if (isNaN(eval(result))) {
       setResult('');
-    } else if (eval(replaceString) === Infinity) {
+    } else if (eval(result) === Infinity) {
       alert('0으로 나눌 수 없습니다');
       setResult('');
       return false;
+    } else if (resultLength > 10) {
+      setResult('Infinity');
     } else {
-      setResult((prev) => eval(replaceString));
+      setResult((prev) => eval(result));
     }
+  };
+
+  const deleteAll = () => {
+    setResult(0);
   };
 
   console.log(result);
@@ -32,7 +41,9 @@ const Calculator = () => {
     <div className='calculatorContainer'>
       <div className='resultScreen'>{result}</div>
       <div className='calButtons'>
-        <button className='sm Btn'>AC</button>
+        <button className='sm Btn' onClick={deleteAll}>
+          AC
+        </button>
         <button className='sm Btn'>C</button>
         <button className='sm Btn'>.</button>
         <button className='sm Btn' value='+' onClick={getOperator}>
@@ -59,8 +70,8 @@ const Calculator = () => {
         <button className='sm Btn' value={6} onClick={getNumber}>
           6
         </button>
-        <button className='sm Btn' value='×' onClick={getOperator}>
-          ×
+        <button className='sm Btn' value='*' onClick={getOperator}>
+          *
         </button>
         <button className='sm Btn' value={1} onClick={getNumber}>
           1
@@ -71,7 +82,7 @@ const Calculator = () => {
         <button className='sm Btn' value={3} onClick={getNumber}>
           3
         </button>
-        <button className='sm Btn' value='÷' onClick={getOperator}>
+        <button className='sm Btn' value='/' onClick={getOperator}>
           ÷
         </button>
         <button className='xLong Btn' value={0} onClick={getNumber}>
