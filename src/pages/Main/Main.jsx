@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Main.scss';
+import Button from '../../components/Button';
 
 const Calculator = () => {
   const [number, setNumber] = useState('');
@@ -81,7 +82,7 @@ const Calculator = () => {
       <div className='resultScreen'>
         {result}
         <span>원</span>
-      </div>
+      </div>{' '}
       <div className='calButtons'>
         <button className='sm Btn' onClick={deleteAll}>
           AC
