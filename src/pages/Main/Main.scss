@@ -11,9 +11,8 @@
 
   .resultScreen {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: end;
+    justify-content: end;
+    align-items: center;
     padding: 0 1%;
     border: 1px solid red;
     border-radius: 20px;
@@ -24,21 +23,25 @@
   .calButtons {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 80%;
     height: 75%;
 
     .Btn {
-      margin: 0 2%;
+      margin: 1% 1%;
       border: 1px solid blue;
       border-radius: 10px;
     }
+
+    .Btn:hover {
+      border: 2px solid black;
+    }
+
     .sm {
       width: 21%;
-      height: 20%;
     }
     .xLong {
-      width: 46%;
-      height: 10%;
+      width: 44%;
     }
   }
 }
