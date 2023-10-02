@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  padding: 10% 0;
   border: 2px solid black;
   border-radius: 20px;
   width: 30vw;
@@ -10,20 +11,34 @@
 
   .resultScreen {
     display: flex;
-    justify-content: end;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    padding: 0 1%;
     border: 1px solid red;
     border-radius: 20px;
     width: 80%;
-    height: 10%;
+    height: 15%;
   }
 
   .calButtons {
     display: flex;
-    .smBtn {
+    flex-wrap: wrap;
+    width: 80%;
+    height: 75%;
+
+    .Btn {
+      margin: 0 2%;
       border: 1px solid blue;
-      border-radius: 5px;
-      width: 100%;
+      border-radius: 10px;
+    }
+    .sm {
+      width: 21%;
+      height: 20%;
+    }
+    .xLong {
+      width: 46%;
+      height: 10%;
     }
   }
 }
