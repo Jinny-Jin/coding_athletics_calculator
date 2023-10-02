@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Main.scss';
 
 const Calculator = () => {
   const [number, setNumber] = useState('');
   const [result, setResult] = useState(0);
+  const [operatorCheck, setOperatorCheck] = useState(false);
 
   const getNumber = (e) => {
     if (result === 0) {
@@ -15,33 +16,47 @@ const Calculator = () => {
     }
     setNumber((prev) => prev + e.target.value);
     setResult((prev) => prev + e.target.value);
+    setOperatorCheck(true);
   };
 
   const getOperator = (e) => {
-    setNumber('');
-    setResult((prev) => prev + e.target.value);
+    if (operatorCheck) {
+      setNumber('');
+      setResult((prev) => prev + e.target.value);
+    }
   };
 
   const getResult = () => {
-    let replaceDivideString = result.replace(/÷/gi, '/');
-    const resultLength = String(eval(replaceDivideString)).length;
-
-    if (isNaN(eval(replaceDivideString))) {
-      setResult('');
-    } else if (eval(replaceDivideString) === Infinity) {
-      setResult('숫자 아님');
-      return false;
-    } else if (resultLength > 10) {
-      setResult('Infinity');
+    if (!operatorCheck || !/[+\-*\/÷]/.test(result)) {
+      alert('올바른 형식을 지켜주세요');
+      return;
     } else {
-      setResult((prev) => eval(replaceDivideString));
+      let replaceDivideString = result.replace(/÷/gi, '/');
+
+      if (
+        isNaN(eval(replaceDivideString)) ||
+        eval(replaceDivideString) === Infinity
+      ) {
+        setResult('숫자 아님');
+        return false;
+      } else if (parseInt(eval(replaceDivideString)) < 0) {
+        alert('세뱃돈이 없어요!');
+        setResult(0);
+        return;
+      } else if (String(parseInt(eval(replaceDivideString))).length > 10) {
+        setResult('Infinity');
+      } else {
+        setResult((prev) => parseInt(eval(replaceDivideString)));
+      }
     }
   };
 
   const deleteOne = () => {
     let sliceResult = String(result).slice(0, -1);
+    let sliceNumber = String(number).slice(0, -1);
 
     setResult((prev) => sliceResult);
+    setNumber((prev) => sliceNumber);
     if (String(result).length <= 1) {
       setResult(0);
     }
@@ -49,9 +64,17 @@ const Calculator = () => {
 
   const deleteAll = () => {
     setResult(0);
+    setNumber('');
+    setOperatorCheck(false);
   };
 
-  console.log('@', number);
+  useEffect(() => {
+    const lastString = result[result.length - 1];
+
+    if (/[+\-*\/÷]/.test(lastString)) {
+      setOperatorCheck(false);
+    }
+  }, [result]);
 
   return (
     <div className='calculatorContainer'>
