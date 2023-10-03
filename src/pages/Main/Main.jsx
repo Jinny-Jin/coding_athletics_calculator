@@ -12,13 +12,18 @@ const Calculator = () => {
   const [controllWon, setControllWon] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const [showMoney, setShowMoney] = useState(false);
 
   const controllAlert = (message) => {
     setAlertMessage(message);
     setShowAlert(true);
   };
 
-  const getNumber = (e) => {
+  const clickMoneyBtn = () => {
+    setShowMoney(true);
+  };
+
+  const getNumber = (num) => {
     if (result === 0 || result === '숫자 아님' || result === 'Infinity') {
       setResult('');
     }
@@ -26,16 +31,16 @@ const Calculator = () => {
       controllAlert('최대 10자리 숫자만 입력 가능합니다');
       return;
     }
-    setNumber((prev) => prev + e.target.value);
-    setResult((prev) => prev + e.target.value);
+    setNumber((prev) => prev + num.target.value);
+    setResult((prev) => prev + num.target.value);
     setOperatorCheck(true);
     setControllWon(true);
   };
 
-  const getOperator = (e) => {
+  const getOperator = (operator) => {
     if (operatorCheck) {
       setNumber('');
-      setResult((prev) => prev + e.target.value);
+      setResult((prev) => prev + operator.target.value);
     }
     setControllWon(true);
   };
@@ -82,7 +87,7 @@ const Calculator = () => {
         setResult('Infinity');
         setControllWon(false);
       } else {
-        setResult((prev) => Math.floor(eval(replaceDivideString)));
+        setResult(Math.floor(eval(replaceDivideString)));
         setNumber(Math.floor(eval(replaceDivideString)));
       }
     }
@@ -95,8 +100,6 @@ const Calculator = () => {
       setOperatorCheck(false);
     }
   }, [result]);
-
-  console.log(number);
 
   return (
     <>
@@ -120,7 +123,7 @@ const Calculator = () => {
           {buttonTypes.map((button) => {
             return (
               <Button
-                key={button.id}
+                key={button.name}
                 name={button.name}
                 className={button.class}
                 functionName={
@@ -137,10 +140,26 @@ const Calculator = () => {
               />
             );
           })}
-          <Button
-            name={<FontAwesomeIcon icon={faMoneyBillWave} color='#6c7062' />}
-            className='sm money Btn'
-          />
+          {!showMoney ? (
+            <Button
+              name={<FontAwesomeIcon icon={faMoneyBillWave} color='#6c7062' />}
+              className='money Btn'
+              functionName={clickMoneyBtn}
+            />
+          ) : (
+            <div className='moneyBtnOn'>
+              {moneyButton.map((money) => {
+                return (
+                  <Button
+                    key={money}
+                    name={money}
+                    className='moneys'
+                    functionName={getNumber}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </>
@@ -150,22 +169,24 @@ const Calculator = () => {
 export default Calculator;
 
 const buttonTypes = [
-  { id: 0, name: 'AC', class: 'op Btn', type: 'ac' },
-  { id: 1, name: 'C', class: 'op Btn', type: 'c' },
-  { id: 2, name: '+', class: 'op Btn', type: 'oper' },
-  { id: 3, name: '-', class: 'op Btn', type: 'oper' },
-  { id: 4, name: 7, class: 'num Btn', type: 'numb' },
-  { id: 5, name: 8, class: 'num Btn', type: 'numb' },
-  { id: 6, name: 9, class: 'num Btn', type: 'numb' },
-  { id: 7, name: '*', class: 'op Btn', type: 'oper' },
-  { id: 8, name: 4, class: 'num Btn', type: 'numb' },
-  { id: 9, name: 5, class: 'num Btn', type: 'numb' },
-  { id: 10, name: 6, class: 'num Btn', type: 'numb' },
-  { id: 11, name: '÷', class: 'op Btn', type: 'oper' },
-  { id: 12, name: 1, class: 'num Btn', type: 'numb' },
-  { id: 13, name: 2, class: 'num Btn', type: 'numb' },
-  { id: 14, name: 3, class: 'num Btn', type: 'numb' },
-  { id: 15, name: '=', class: 'op Btn' },
-  { id: 16, name: 0, class: 'xLong num Btn', type: 'numb' },
-  { id: 17, name: '00', class: 'num Btn', type: 'numb' },
+  { name: 'AC', class: 'op Btn', type: 'ac' },
+  { name: 'C', class: 'op Btn', type: 'c' },
+  { name: '+', class: 'op Btn', type: 'oper' },
+  { name: '-', class: 'op Btn', type: 'oper' },
+  { name: 7, class: 'num Btn', type: 'numb' },
+  { name: 8, class: 'num Btn', type: 'numb' },
+  { name: 9, class: 'num Btn', type: 'numb' },
+  { name: '*', class: 'op Btn', type: 'oper' },
+  { name: 4, class: 'num Btn', type: 'numb' },
+  { name: 5, class: 'num Btn', type: 'numb' },
+  { name: 6, class: 'num Btn', type: 'numb' },
+  { name: '÷', class: 'op Btn', type: 'oper' },
+  { name: 1, class: 'num Btn', type: 'numb' },
+  { name: 2, class: 'num Btn', type: 'numb' },
+  { name: 3, class: 'num Btn', type: 'numb' },
+  { name: '=', class: 'op Btn' },
+  { name: 0, class: 'xLong num Btn', type: 'numb' },
+  { name: '00', class: 'num Btn', type: 'numb' },
 ];
+
+const moneyButton = [10000, 50000, 100000];

@@ -4,14 +4,26 @@
   border-radius: 10px;
   font-weight: 600;
   font-size: x-large;
+  text-align: center;
   width: 23%;
+  height: 20%;
 }
 
 .xLong {
   width: 48%;
 }
 
-.money:hover {
+.moneys {
+  border-radius: 5px;
+  width: 80%;
+  height: 25%;
+  text-align: center;
+  background-color: #6c7062;
+  color: white;
+}
+
+.money:hover,
+.moneys:hover {
   opacity: 50%;
 }
 
