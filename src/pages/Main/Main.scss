@@ -4,8 +4,9 @@
   justify-content: space-around;
   align-items: center;
   padding: 10% 0;
-  border: 2px solid black;
+  border: 1px solid transparent;
   border-radius: 20px;
+  box-shadow: (0px 0px 20px #fff5eb);
   width: 30vw;
   height: 80vh;
 
@@ -13,11 +14,19 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    padding: 0 1%;
-    border: 1px solid red;
+    padding: 7% 1%;
+    border: 1px solid transparent;
     border-radius: 20px;
+    background-color: #fff5eb;
     width: 80%;
-    height: 15%;
+    font-size: larger;
+    text-align: center;
+    font-weight: 600;
+
+    .won {
+      padding-left: 1%;
+      font-weight: 400;
+    }
   }
 
   .calButtons {
@@ -27,21 +36,11 @@
     width: 80%;
     height: 75%;
 
-    .Btn {
+    .empty {
       margin: 1% 1%;
-      border: 1px solid blue;
+      border: 1px solid transparent;
       border-radius: 10px;
-    }
-
-    .Btn:hover {
-      border: 2px solid black;
-    }
-
-    .sm {
-      width: 21%;
-    }
-    .xLong {
-      width: 44%;
+      width: 23%;
     }
   }
 }

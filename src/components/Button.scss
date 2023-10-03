@@ -1,16 +1,26 @@
 .Btn {
   margin: 1% 1%;
-  border: 1px solid blue;
+  border: 1px solid transparent;
   border-radius: 10px;
+  font-weight: 600;
+  font-size: x-large;
 }
 
 .Btn:hover {
-  border: 2px solid black;
+  box-shadow: (0px 0px 7px rgb(0, 0, 0.5));
 }
 
 .sm {
-  width: 21%;
+  width: 23%;
 }
 .xLong {
-  width: 44%;
+  width: 48%;
+}
+
+.op {
+  background-color: #deedf0;
+}
+
+.num {
+  background-color: #fff5eb;
 }
