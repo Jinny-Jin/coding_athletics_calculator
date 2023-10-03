@@ -1,13 +1,16 @@
 # 🙇🏼‍♀️세뱃돈 계산기
 
-## About Project
+## 📍About Project
 
-> React.js로 만든 세뱃돈 계산기 프로젝트입니다
+> React.js로 만든 세뱃돈 계산기 프로젝트입니다 </br>
 > 계산기의 기본 기능과 세뱃돈 계산을 위한 추가 기능을 구현하였습니다
 
 </br>
 
 ### 📍Screenshot
+
+![계산기](https://github.com/Jinny-Jin/coding_athletics_calculator/assets/119784298/5345c221-9afb-4d1b-801a-5aa83eeb4a56)
+
 
 </br>
 
