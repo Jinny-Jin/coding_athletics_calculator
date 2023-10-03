@@ -1,7 +1,5 @@
 # 🙇🏼‍♀️세뱃돈 계산기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## About Project
 
 > React.js로 만든 세뱃돈 계산기 프로젝트입니다
