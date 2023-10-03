@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import './Main.scss';
 import Button from '../../components/Button/Button';
+import Alert from '../../components/Alert/Alert';
 
 const Calculator = () => {
   const [number, setNumber] = useState('');
   const [result, setResult] = useState(0);
   const [operatorCheck, setOperatorCheck] = useState(true);
   const [controllWon, setControllWon] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const controllAlert = (message) => {
+    setAlertMessage(message);
+    setShowAlert(true);
+  };
 
   const getNumber = (e) => {
     if (result === 0 || result === '숫자 아님' || result === 'Infinity') {
       setResult('');
     }
     if (number.length >= 10) {
-      alert('최대 10자리 숫자만 입력 가능합니다');
+      controllAlert('최대 10자리 숫자만 입력 가능합니다');
       return;
     }
     setNumber((prev) => prev + e.target.value);
@@ -50,7 +58,7 @@ const Calculator = () => {
 
   const getResult = () => {
     if (!operatorCheck || !/[+\-*\/÷]/.test(result)) {
-      alert('올바른 형식을 지켜주세요');
+      controllAlert('올바른 형식을 지켜주세요');
       return;
     } else {
       let replaceDivideString = result.replace(/÷/gi, '/');
@@ -63,7 +71,7 @@ const Calculator = () => {
         setControllWon(false);
         return false;
       } else if (parseInt(eval(replaceDivideString)) < 0) {
-        alert('세뱃돈이 없어요!');
+        controllAlert('세뱃돈이 없어요!');
         setResult(0);
         return;
       } else if (String(parseInt(eval(replaceDivideString))).length > 10) {
@@ -84,35 +92,48 @@ const Calculator = () => {
   }, [result]);
 
   return (
-    <div className='calculatorContainer'>
-      <div className={controllWon ? 'resultScreen' : 'resultScreen isError'}>
-        {result}
-        {controllWon ? <span className='won'>원</span> : ''}
+    <>
+      {showAlert && (
+        <Alert
+          message={alertMessage}
+          showAlert={showAlert}
+          setShowAlert={setShowAlert}
+        />
+      )}
+      <div
+        className={
+          showAlert ? 'calculatorContainer behind' : 'calculatorContainer'
+        }
+      >
+        <div className={controllWon ? 'resultScreen' : 'resultScreen isError'}>
+          {result}
+          {controllWon ? <span className='won'>원</span> : ''}
+        </div>
+        <div className='calButtons'>
+          {buttonTypes.map((button) => {
+            return (
+              <Button
+                key={button.id}
+                name={button.name}
+                className={button.class}
+                functionName={
+                  button.type === 'numb'
+                    ? getNumber
+                    : button.type === 'oper'
+                    ? getOperator
+                    : button.type === 'ac'
+                    ? deleteAll
+                    : button.type === 'c'
+                    ? deleteOne
+                    : getResult
+                }
+              />
+            );
+          })}
+          <div className='empty'></div>
+        </div>
       </div>
-      <div className='calButtons'>
-        {buttonTypes.map((button) => {
-          return (
-            <Button
-              key={button.id}
-              name={button.name}
-              className={button.class}
-              functionName={
-                button.type === 'numb'
-                  ? getNumber
-                  : button.type === 'oper'
-                  ? getOperator
-                  : button.type === 'ac'
-                  ? deleteAll
-                  : button.type === 'c'
-                  ? deleteOne
-                  : getResult
-              }
-            />
-          );
-        })}
-        <div className='empty'></div>
-      </div>
-    </div>
+    </>
   );
 };
 
