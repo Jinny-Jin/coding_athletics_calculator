@@ -7,7 +7,7 @@
 
 </br>
 
-### 📍Screensho
+### 📍Screenshot
 
 ![계산기](https://github.com/Jinny-Jin/coding_athletics_calculator/assets/119784298/5345c221-9afb-4d1b-801a-5aa83eeb4a56)
 
