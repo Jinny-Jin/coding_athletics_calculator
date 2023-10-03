@@ -142,7 +142,13 @@ const Calculator = () => {
           })}
           {!showMoney ? (
             <Button
-              name={<FontAwesomeIcon icon={faMoneyBillWave} color='#6c7062' />}
+              name={
+                <FontAwesomeIcon
+                  icon={faMoneyBillWave}
+                  color='#6c7062'
+                  size='lg'
+                />
+              }
               className='money Btn'
               functionName={clickMoneyBtn}
             />
