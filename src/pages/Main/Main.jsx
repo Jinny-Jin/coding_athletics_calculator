@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './Main.scss';
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 
 const Calculator = () => {
   const [number, setNumber] = useState('');
   const [result, setResult] = useState(0);
-  const [operatorCheck, setOperatorCheck] = useState(false);
+  const [operatorCheck, setOperatorCheck] = useState(true);
   const [controllWon, setControllWon] = useState(true);
 
   const getNumber = (e) => {
-    if (result === 0) {
+    if (result === 0 || result === '숫자 아님' || result === 'Infinity') {
       setResult('');
     }
     if (number.length >= 10) {
@@ -19,6 +19,7 @@ const Calculator = () => {
     setNumber((prev) => prev + e.target.value);
     setResult((prev) => prev + e.target.value);
     setOperatorCheck(true);
+    setControllWon(true);
   };
 
   const getOperator = (e) => {
@@ -26,6 +27,7 @@ const Calculator = () => {
       setNumber('');
       setResult((prev) => prev + e.target.value);
     }
+    setControllWon(true);
   };
 
   const deleteOne = () => {
@@ -43,6 +45,7 @@ const Calculator = () => {
     setResult(0);
     setNumber('');
     setOperatorCheck(false);
+    setControllWon(true);
   };
 
   const getResult = () => {
@@ -82,7 +85,7 @@ const Calculator = () => {
 
   return (
     <div className='calculatorContainer'>
-      <div className='resultScreen'>
+      <div className={controllWon ? 'resultScreen' : 'resultScreen isError'}>
         {result}
         {controllWon ? <span className='won'>원</span> : ''}
       </div>

@@ -29,6 +29,10 @@
     }
   }
 
+  .isError {
+    color: red;
+  }
+
   .calButtons {
     display: flex;
     flex-wrap: wrap;
