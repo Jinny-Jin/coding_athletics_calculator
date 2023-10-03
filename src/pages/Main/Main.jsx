@@ -42,8 +42,8 @@ const Calculator = () => {
     let sliceResult = String(result).slice(0, -1);
     let sliceNumber = String(number).slice(0, -1);
 
-    setResult((prev) => sliceResult);
-    setNumber((prev) => sliceNumber);
+    setResult(sliceResult);
+    setNumber(sliceNumber);
     if (String(result).length <= 1) {
       setResult(0);
     }
@@ -69,16 +69,19 @@ const Calculator = () => {
       ) {
         setResult('숫자 아님');
         setControllWon(false);
+        setNumber('');
         return false;
-      } else if (parseInt(eval(replaceDivideString)) < 0) {
+      } else if (Math.floor(eval(replaceDivideString)) < 0) {
         controllAlert('세뱃돈이 없어요!');
         setResult(0);
+        setNumber('');
         return;
-      } else if (String(parseInt(eval(replaceDivideString))).length > 10) {
+      } else if (String(Math.floor(eval(replaceDivideString))).length > 10) {
         setResult('Infinity');
         setControllWon(false);
       } else {
-        setResult((prev) => parseInt(eval(replaceDivideString)));
+        setResult((prev) => Math.floor(eval(replaceDivideString)));
+        setNumber(Math.floor(eval(replaceDivideString)));
       }
     }
   };
@@ -90,6 +93,8 @@ const Calculator = () => {
       setOperatorCheck(false);
     }
   }, [result]);
+
+  console.log(number);
 
   return (
     <>

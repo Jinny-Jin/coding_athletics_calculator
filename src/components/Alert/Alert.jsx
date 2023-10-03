@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './Alert.scss';
+import { faAngry } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Alert = ({ message, showAlert, setShowAlert }) => {
   const alertRef = useRef(null);
@@ -27,6 +29,7 @@ const Alert = ({ message, showAlert, setShowAlert }) => {
 
   return (
     <div className='alertScreen' ref={alertRef}>
+      <FontAwesomeIcon icon={faAngry} color='red' size='lg' />
       {message}
       <button onClick={closeAlert} className='okBtn'>
         확인
